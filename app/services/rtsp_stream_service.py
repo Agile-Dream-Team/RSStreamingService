@@ -5,6 +5,7 @@ import threading
 import logging
 from RSKafkaWrapper.client import KafkaClient
 
+
 class RTSPStreamService:
     def __init__(self, rtsp_url, kafka_client: KafkaClient):
         self.rtsp_url = rtsp_url
@@ -26,7 +27,7 @@ class RTSPStreamService:
             if not ret:
                 logging.error("Failed to encode frame")
                 continue
-
+            cv2.imshow('RTSP Stream', frame)
             # Convert the buffer to bytes
             frame_bytes = buffer.tobytes()
             frame_base64 = base64.b64encode(frame_bytes).decode('utf-8')
@@ -47,6 +48,7 @@ class RTSPStreamService:
 
     def stop_stream(self):
         self.running = False
+
 
 def start_rtsp_stream(rtsp_url, kafka_client):
     stream_service = RTSPStreamService(rtsp_url, kafka_client)
