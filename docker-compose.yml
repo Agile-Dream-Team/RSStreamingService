@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  warehouse:
+  streaming:
     build: .
     ports:
       - "${WEBHOOK_PORT}:${WEBHOOK_PORT}"
@@ -10,6 +10,7 @@ services:
       - VARIABLE_NAME=app
       - WEBHOOK_PORT=${WEBHOOK_PORT}
       - WEBHOOK_HOST=${WEBHOOK_HOST}
+      - RTSP_URL=${RTSP_URL}
       - ENVIRONMENT=${ENVIRONMENT}
       - KAFKA_TOPICS=${KAFKA_TOPICS}
     env_file:
